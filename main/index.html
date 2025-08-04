@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="google-translate-customization" content="9f841e7780177523-3214ceb76f765f38-gc38c6fe6f9d06436-c">
+  </meta>
+
+  <title>HarshTech World</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./assets/images/harshtech.jpg" type="image/x-icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  <style>
+    .cookie-popup,
+    .preferences-popup {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      z-index: 1000;
+      transition: all 0.5s ease;
+    }
+
+    .cookie-popup.show,
+    .preferences-popup.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    h4 {
+      margin-top: 0;
+    }
+
+    .cookie-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 15px;
+    }
+
+    .cookie-buttons button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .accept-btn {
+      background: #4caf50;
+      color: white;
+    }
+
+    .accept-btn:hover {
+      background: #45a045;
+    }
+
+    .reject-btn {
+      background: #f44336;
+      color: white;
+    }
+
+    .reject-btn:hover {
+      background: #d32f2f;
+    }
+
+    .manage-btn {
+      background: #2196f3;
+      color: white;
+    }
+
+    .manage-btn:hover {
+      background: #1976d2;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+    }
+
+    .checkbox {
+      margin-right: 8px;
+    }
+
+    .preferences-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* WhatsApp floating icon */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 10px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .whatsapp-float img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float img:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 500px) {
+
+      .cookie-buttons,
+      .preferences-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+  <style>
+    /* Welcome Popup */
+    .welcome-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .welcome-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 150, 0.5);
+      text-align: center;
+      max-width: 90%;
+      width: 320px;
+      animation: fadeIn 1s ease;
+    }
+
+    .welcome-box img {
+      width: 80px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .auto-typing {
+      font-size: 16px;
+      color: #333;
+      min-height: 50px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Neon WhatsApp-style Icon */
+    .chatbot-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 65px;
+      height: 65px;
+      background: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #25D366, 0 0 20px #25D366;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .chatbot-icon img {
+      width: 30px;
+      height: 30px;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 5px #25D366;
+      }
+
+      50% {
+        box-shadow: 0 0 20px #25D366;
+      }
+
+      100% {
+        box-shadow: 0 0 5px #25D366;
+      }
+    }
+
+    /* Chatbox */
+    .chatbox {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 320px;
+      max-height: 500px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+      overflow: hidden;
+    }
+
+    @media (max-width: 500px) {
+      .chatbox {
+        width: 90%;
+        right: 5%;
+        bottom: 90px;
+      }
+    }
+
+    .chatbox-header {
+      background-color: #25D366;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      color: white;
+    }
+
+    .chatbox-messages {
+      flex: 1;
+      padding: 15px;
+      background: #f9f9f9;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      padding: 10px 15px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .message.bot {
+      background-color: #25D366;
+      color: white;
+      align-self: flex-start;
+    }
+
+    .message.user {
+      background-color: #d1ffd6;
+      align-self: flex-end;
+    }
+
+    .chatbox-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .chatbox-input input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    .chatbox-input button {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .commands {
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      background: #f0f0f0;
+    }
+
+    .commands button {
+      background: #25D366;
+      border: none;
+      color: white;
+      border-radius: 20px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .commands button:hover {
+      background: #1da851;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Spinner Start  -->
+  <!-- <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div> -->
+  <!-- Spinner End
+     Initial Cookie Consent -->
+
+  <!-- Welcome Popup -->
+
+
+  <!-- <div class="welcome-popup" id="welcomePopup">
+  <div class="welcome-box">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="Bot">
+    <div class="auto-typing" id="typingText"></div>
+  </div>
+</div> -->
+
+  <!-- Chatbox -->
+  <!-- <div class="chatbox" id="chatbox">
+  <div class="chatbox-header">
+    🤖 HarshTech Assistant
+    <div class="close-btn" onclick="toggleChatbox()">❌</div>
+  </div>
+  <div class="chatbox-messages" id="chatMessages">
+    <div class="message bot">Hi! I'm your assistant. Try commands below 👇</div>
+  </div>
+  <div class="commands">
+    <button onclick="sendCommand('go to login page')">Login Page</button>
+    <button onclick="sendCommand('go to login page')">BCS</button>
+    <button onclick="sendCommand('go to home page')">Home Page</button>
+    <button onclick="sendCommand('whatsapp chatbot')">WhatsApp Chatbot</button>
+  </div>
+  <div class="chatbox-input">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div> -->
+
+  <!-- Floating Icon -->
+  <!-- <div class="chatbot-icon" id="chatbotIcon" onclick="toggleChatbox()">
+  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="Chat">
+</div> -->
+
+  <!-- Audio Files -->
+  <!-- <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
+<audio id="commandSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
+<script>
+  const chatbox = document.getElementById("chatbox");
+  const chatMessages = document.getElementById("chatMessages");
+  const clickSound = document.getElementById("clickSound");
+  const commandSound = document.getElementById("commandSound");
+  const welcomePopup = document.getElementById("welcomePopup");
+  const chatbotIcon = document.getElementById("chatbotIcon"); -->
+
+   <!-- // Toggle chat window
+  function toggleChatbox() {
+    chatbox.style.display = chatbox.style.display === "flex" ? "none" : "flex";
+    chatbox.style.flexDirection = "column";
+    clickSound.play();
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("userInput");
+    const msg = input.value.trim();
+    if (msg === "") return;
+    addMessage(msg, "user");
+    input.value = "";
+    setTimeout(() => handleCommand(msg.toLowerCase()), 600);
+  }
+
+  function sendCommand(cmd) {
+    addMessage(cmd, "user");
+    commandSound.play();
+    setTimeout(() => handleCommand(cmd.toLowerCase()), 500);
+  }
+
+  function addMessage(text, type) {
+    const msg = document.createElement("div");
+    msg.className = `message ${type}`;
+    msg.innerText = text;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function handleCommand(command) {
+    let reply = "❓ Sorry, I didn’t understand that.";
+    if (command.includes("login")) {
+      reply = "🔐 Redirecting to login page...";
+      setTimeout(() => window.location.href = "./Login/login.html", 1500);
+    } else if (command.includes("BCS")) {
+      reply = "🏠 Going to home page...";
+      setTimeout(() => window.location.href = "https://nckbcs.netlify.app", 1500);
+    } else if (command.includes("whatsapp")) {
+      reply = "💬 Opening WhatsApp Chatbot...";
+      setTimeout(() => window.open("https://wa.me/your-number", "_blank"), 1500);
+    }
+    addMessage(reply, "bot");
+    commandSound.play();
+  }
+
+  // Auto typing welcome effect
+  const typingText = document.getElementById("typingText");
+  const welcomeMessage = "Hi! Any help you need, just ask me...";
+  let index = 0;
+
+  function typeWelcomeText() {
+    if (index < welcomeMessage.length) {
+      typingText.innerHTML += welcomeMessage.charAt(index);
+      index++;
+      setTimeout(typeWelcomeText, 50);
+    } else {
+      setTimeout(() => {
+        welcomePopup.style.display = "none";
+        chatbotIcon.style.display = "flex";
+      }, 1500);
+    }
+  }
+
+  // Start on load
+  window.onload = () => {
+    chatbotIcon.style.display;
+    typeWelcomeText();
+  };
+</script> -->
+
+  <div class="cookie-popup" id="cookiePopup">
+    <h4>🍪 We Use Cookies</h4>
+    <p>We use cookies to personalize content and ads, to provide social media features and to analyze our traffic. You
+      can manage your preferences anytime.</p>
+    <div class="cookie-buttons">
+      <button class="reject-btn" onclick="saveConsent(false)">Reject All</button>
+      <button class="manage-btn" onclick="openPreferences()">Manage Preferences</button>
+      <button class="accept-btn" onclick="saveConsent(true)">Accept All</button>
+    </div>
+  </div>
+
+  <!-- Manage Preferences Modal -->
+  <div class="preferences-popup" id="preferencesPopup">
+    <h4>🔧 Manage Cookie Preferences</h4>
+    <form id="cookieForm">
+      <label><input type="checkbox" class="checkbox" checked disabled> Necessary Cookies (Always Enabled)</label>
+      <label><input type="checkbox" class="checkbox" id="analyticsCookies"> Analytics Cookies</label>
+      <label><input type="checkbox" class="checkbox" id="marketingCookies"> Marketing Cookies</label>
+    </form>
+    <div class="preferences-buttons">
+      <button class="reject-btn" onclick="closePreferences()">Cancel</button>
+      <button class="accept-btn" onclick="savePreferences()">Save Preferences</button>
+    </div>
+  </div>
+
+  <!-- WhatsApp icon link -->
+  <a href="https://harshadteli.github.io/web-server3" target="_blank" class="whatsapp-float">
+    <img src="./assets/images/message.png" alt="developer-intro" />
+  </a>
+
+  <script>
+    // Show cookie popup if not already accepted
+    window.addEventListener("load", () => {
+      const consent = localStorage.getItem("cookieConsent");
+      if (!consent) {
+        setTimeout(() => {
+          document.getElementById("cookiePopup").classList.add("show");
+        }, 1000);
+      }
+    });
+
+    function saveConsent(acceptAll) {
+      const consent = {
+        necessary: true,
+        analytics: acceptAll,
+        marketing: acceptAll
+      };
+      localStorage.setItem("cookieConsent", JSON.stringify(consent));
+      document.getElementById("cookiePopup").classList.remove("show");
+    }
+
+    function openPreferences() {
+      document.getElementById("cookiePopup").classList.remove("show");
+      document.getElementById("preferencesPopup").classList.add("show");
+    }
+
+    function closePreferences() {
+      document.getElementById("preferencesPopup").classList.remove("show");
+      setTimeout(() => {
+        document.getElementById("cookiePopup").classList.add("show");
+      }, 300);
+    }
+
+    function savePreferences() {
+      const analytics = document.getElementById("analyticsCookies").checked;
+      const marketing = document.getElementById("marketingCookies").checked;
+
+      const consent = {
+        necessary: true,
+        analytics: analytics,
+        marketing: marketing
+      };
+
+      localStorage.setItem("cookieConsent", JSON.stringify(consent));
+      document.getElementById("preferencesPopup").classList.remove("show");
+    }
+  </script>
+
+
+  <!-- <-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+      <p class="m-0 fw-bold" style="font-size: 25px;"><img src="./assets/images/harshtech.jpg" alt="E404"
+          height="60px">Harsh<span style="color: rgb(214, 41, 41);">Tech</span>
+      </p>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <!-- <a href="index.html" class="nav-item nav-link active"><img src="harshu.jpg"height="50px" alt=""></a> -->
+        <a href="index.html" class="nav-item nav-link active"><font color="red">Home</font></a>
+        <a href="about.html" class="nav-item nav-link">About us</a>
+        <a href="https://harshadteli.github.io/harshadteli-Portfolio/" class="nav-item nav-link">Harshad's Portfolio</a>
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+          <div class="dropdown-menu fade-down m-0">
+            <a href="developer.html" class="dropdown-item">Developer</a>
+            <a href="testimonial.html" class="dropdown-item">Reviews</a>
+            <a href="https://harshadteli.github.io/Feedback-Form-HarshTech/" class="dropdown-item">Feedback</a>
+
+          </div>
+        </div>
+        <a href="contact.html" class="nav-item nav-link">Contact</a>
+        <a href="./Login/login.html" class="nav-item nav-link"><i class="fa fa-user"></i></a>
+        <a href="./Login/login.html" class="nav-item nav-link">
+
+          <div id="google_translate_element">
+          </div>
+
+
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+
+  <!-- Carousel Start -->
+  <div class="container-fluid p-0 mb-4">
+    <div class="owl-carousel header-carousel position-relative">
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets/images/virtual.png" alt="E404">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">Welcome
+                  To Natasha Chatbot</h5>
+                <h1 class="display-3 text-white animated slideInDown">Become with some interactive user interface and
+                  chatting and having fun</h1>
+                <p class=" text-white mb-4 pb-2">This assistent can be provide the entertainment and conversation,
+                  Language learning and to perform the specific task like the show the web tools,play music,motivation
+                  etc
+                </p>
+                <a href="./Login/login.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See
+                  More</a>
+                <a href="https://harshadteli.github.io/web-server1/"
+                  class="btn btn-light py-md-3 px-md-5 animated slideInRight">Get
+                  Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets/images/natasha.jpg" alt="">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">Welcome to Natasha Virtual
+                  Assistent.</h5>
+                <h1 class="display-3 text-white animated slideInDown">Talk Smart Think Fast Go Natasha
+                </h1>
+                <p class=" text-white mb-4 pb-2">Natasha is a smart ,voice-powered virtual assistent by HarshTech
+                  ,designed to make web interaction faster,user-friendly and more fun</p>
+                <a href="./Login/login.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See
+                  More</a>
+                <a href="https://harshadteli.github.io/web-server2/"
+                  class="btn btn-light py-md-3 px-md-5 animated slideInRight">Get
+                  Started</a><br><br>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets/images/resume.jpg" alt="">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">Welcome to
+                  Resume builder AI Tool</h5>
+                <h1 class="display-3 text-white animated slideInDown">Let's create the simple resume in easy way....
+                </h1>
+                <p class=" text-white mb-4 pb-2">A resume often serves as the first impression you make on a potential
+                  employer.
+                  A well-crafted resume can showcase your skills,experience and achievements in a clear and concise
+                  manner.
+                </p>
+                <a href="./Login/login.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See
+                  More</a>
+                <a href="https://harshadteli.github.io/web-product2/"
+                  class="btn btn-light py-md-3 px-md-5 animated slideInRight">Get
+                  Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets/images/editor.jpg" alt="E404">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">Welcome to
+                  HarshTech code editor</h5>
+                <h1 class="display-3 text-white animated slideInDown">This code editor is specially design for
+                  Beginners.
+                </h1>
+                <p class=" text-white mb-4 pb-2">This code editor content the AI based integration and runing the mini
+                  projects in single window including the HTML5,CSS and JAVASCRIPT.</p>
+                <a href="./Login/login.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See
+                  More</a>
+                <a href="https://harshadteli.github.io/harshtech-code-editor/"
+                  class="btn btn-light py-md-3 px-md-5 animated slideInRight">Get
+                  Started</a><br><br>
+                <a href="https://github.com/harshadteli/harshtech-code-editor/releases/tag/v1.0.0"
+                  class="btn btn-light py-md-3 px-md-5 animated slideInRight">Download
+                  App</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets/images/web-tools.png" alt="web-tools">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">Welcome to
+                  Web Tools assistent.</h5>
+                <h1 class="display-3 text-white animated slideInDown">This assistent manage your various Web-Tasks.
+                </h1>
+                <p class=" text-white mb-4 pb-2">Web AI assistants can help with a wide range of tasks from customer
+                  support to content creation.
+                  They can save time ,increase efficiency and improve user experience.
+                </p>
+                <a href="./Login/login.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See
+                  More</a>
+                <a href="https://harshadteli.github.io/web-product7/"
+                  class="btn btn-light py-md-3 px-md-5 animated slideInRight">Get
+                  Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets/images/skills.png" alt="programming-skills">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">Welcome to
+                  Programming skills hub.</h5>
+                <h1 class="display-3 text-white animated slideInDown">To learning the programming languages with AI
+                  based integration.
+                </h1>
+                <p class=" text-white mb-4 pb-2">AI-powered platforms can provide Personalized learning recommendations
+                  based on a programmers strengths,weakness and learning style.</p>
+                <a href="./Login/login.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See
+                  More</a>
+                <a href="https://harshadteli.github.io/web-product8/"
+                  class="btn btn-light py-md-3 px-md-5 animated slideInRight">Get
+                  Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets/images/nck.jpg" alt="NCK">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">The New College Kolhapur
+                  .</h5>
+                <h1 class="display-3 text-white animated slideInDown">Welcome to B.Sc Computer Science (Entire)
+                </h1>
+                <p class=" text-white mb-4 pb-2">To enhance proficiency in high level programming language & operating
+                  system by applying modern techniques of software engineering.
+                  <br><br>Shivaji Peth, Kolhapur.
+                </p>
+                <a href="https://nckbcs.netlify.app/"
+                  class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See More</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="./assets//images/devish.jpg" alt="Devish">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(24, 29, 56, .7);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-sm-10 col-lg-8">
+                <h5 class=" text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">devish ingredients private
+                  limited
+                  .</h5>
+                <h1 class="display-3 text-white animated slideInDown">Fermentation Dry Yeast And Enzyme Formulations
+
+                </h1>
+                <p class=" text-white mb-4 pb-2">Floor 3rd, Flat No. 301, B Wing Pushpanjali Residency, Phase 2, Vedant
+                  Road, Energia Gym, Thane West,Thane-400615, Maharashtra, India
+                  <br><br><b>Mr. Madhav Phalle. (Managing Director)</b>
+                </p>
+                <a href="construction.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">See
+                  More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Carousel End -->
+
+
+  <!-- Service Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="row g-2 text-center">
+        <div class="col-12 wow fadeInUp" data-wow-delay="0.3s">
+          <h1 style="color: #1293b4;">Become With HarshTech Organization.</h1>
+          <p class="mb-5">This organization is founded by Harshad Teli.our organization from basic programming language
+            understanding to the advance level with strong work ethic,
+            Adaptability and Learning and also to trying to solving the real
+            world challenges,that's why we are developing this Software at academic level to understand that to get
+            experience with the developing the real Software in the Market.</p>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="service-item text-center pt-3 shadow">
+            <div class="p-4">
+              <img src="img/icon1.png" alt="" width="60px" class="mb-4">
+              <h5 class="mb-3">unlock your potential with HarshTech!</h5>
+              <p>In future we offer the software that related to the developing the programming skills for beginners on
+                the AI based integration.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="service-item text-center pt-3 shadow">
+            <div class="p-4">
+              <img src="img/icon2.png" alt="" width="60px" class="mb-4">
+              <h5 class="mb-3">Unlock free Poductivity with HarshTech!</h5>
+              <p>We provide the free to use, easy to access & streamline your work flow an boost Productivity</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="service-item text-center pt-3 shadow">
+            <div class="p-4">
+              <img src="img/icon3.png" alt="" width="60px" class="mb-4">
+              <h5 class="mb-3">Doing Smart Work </h5>
+              <p>Our approach to the save time, increase efficiency and unlock new opportunities and drive business
+                growth.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+          <div class="service-item text-center pt-3 shadow">
+            <div class="p-4">
+              <img src="./assets/images/web-tool.png" alt="" width="60px" class="mb-4">
+              <h5 class="mb-3">Advanced web-AI tools</h5>
+              <p>Unlock the power of AI with HarshTech's Advanced web-Tools</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Service End -->
+
+
+  <!-- About Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+          <div class="position-relative h-100">
+            <img class="img-fluid position-absolute w-100 h-100" src="harshu.jpg" alt="" style="object-fit: cover;">
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+          <h6 class="section-title bg-white text-start pe-3">About Us</h6>
+          <h1 class="mb-4" style="color: #fb873f;">Crafting the Future of Smart Interaction.</h1>
+          <p class="mb-4">HarshTech is an innovative software brand dedicated to building smart,user-friendly web AI
+            tools that empower
+            users with advanced automation,voice interaction and intelligent browsing experience
+            HarshTech combines cutting-edge web technolgies wih Artificial Intelligence
+            to deliver responsive,secure & dynamic web applications.</p>
+          <p class="mb-4"> from AI-powered chatbots and virtual assistents to intelligent search engines and
+            voice-controlled
+            platforms,HarshTech is shaping the future of web interaction one short toool at a
+            time.</p>
+          <div class="row gy-2 gx-4 mb-4">
+            <div class="col-sm-6">
+              <p class="mb-0"><i class="fa fa-arrow-right  me-2"></i>Voice-Activated Commands</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Smart AI chatbots</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Light/Dark theme switching</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Export to pdf</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Audio-Responsive system</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Full Mobile Responsiveness.</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Online/Offline Status detection.</p>
+            </div>
+          </div>
+          <a class="btn text-light py-3 px-5 mt-2" id="play" href="about.html">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- About End -->
+
+
+
+
+  <!-- Banner-1 Start -->
+  <div class="container-xxl py-5 pt-5 bg-light">
+    <div class="container">
+      <div class="row g-5 ">
+        <div class="col-lg-6 p-5 wow fadeInUp" data-wow-delay="0.3s">
+
+          <h1 class="mb-4" style="color: #fb873f;">Generated advanced Web-Tools and Assistent's</h1>
+          <p class="mb-4">HarshTech's Web-Tools chatbot is a sleek,Ai-driven conversational assistent designed to
+            elevate user interaction
+            on the web engineered for natural language understanding,it respond to voice and text inputs with
+            intelligent,context-aware replies..</p>
+
+          <a class="btn text-light py-3 px-5 mt-2" href="https://harshadteli.github.io/web-product7/">Start For Free</a>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+          <div class="position-relative h-100">
+            <img class="img-fluid position-absolute w-100 h-100" src="./assets/images/digital.gif"
+              alt="webo-tools-banner" style="object-fit: cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Banner-1 End -->
+
+
+
+  <!-- Categories Start -->
+  <div class="container-xxl py-5 category">
+    <div class="container">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title bg-white text-center px-3">Our WorkSpace</h6>
+        <h1 class="mb-5" style="color: #fb873f;">We are Working in....</h1>
+      </div>
+      <div class="row g-2 m-2">
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat1.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center">Microsoft Excel</a>
+            </h5>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat2.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center"> AWS</a>
+            </h5>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat3.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center">Python</a>
+            </h5>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat4.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center">Java</a>
+            </h5>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat5.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center">Web Design</a>
+            </h5>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat6.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center">Web Development</a>
+            </h5>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat7.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center">MySQL</a>
+            </h5>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6  text-center">
+          <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+
+            <img src="img/cat8.png" class="img-fluid" alt="categories"></i>
+
+            <h5 class="my-2">
+              <a href="#" class="text-center">UI/UX Design</a>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Banner-2 Start -->
+  <section class="pb-5" style="background: url('img/banner-3.jpg');">
+    <div class="container-xxl mt-5">
+      <div class="container">
+        <div class="row g-5 ">
+
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+            <div class="position-relative h-100">
+              <img class="img-fluid position-absolute w-100 h-100 bg-light" src="./assets/images/digi2.jpg"
+                alt="Digital-Marketing" style="object-fit: cover;">
+            </div>
+          </div>
+
+          <div class="col-lg-6 p-5 wow fadeInUp" data-wow-delay="0.3s">
+
+            <h1 class="mb-4" style="color: #fb873f;">HarshTech Digital Marketing World</h1>
+            <p class="mb-4 text-white">HarshTech is not just about AI and Web-Tools it's also reshaping the landscape of
+              digital
+              marketing with intelligent automation and interactive web experience.
+            </p>
+
+            <a class="btn text-light py-3 mt-2" href="https://harshadteli.github.io/harshtechdigitalmarketing/">Get
+              Started</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Banner-2 End -->
+
+  <!-- FAQ Start  -->
+  <div class="container-xxl py-5 category">
+    <div class="container">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+
+        <h1 class="mb-5">Frequently Asked Questions</h1>
+      </div>
+      <div class="row g-2">
+        <div class="col-12">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  What is HarshTech ?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  HarshTech is a tech brand focused on developing AI-powered web tools like voice
+                  assistents,chatbots,smart search engines,and interactive web experience.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Who created the HarshTech ?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  HarshTech was founded and developed by <b>Harshad Teli</b>,with a mission to blend artificial
+                  intelligence and web technology for smarter,user-friendly tools
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  What kind of tools does HarshTech offer?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  HarshTech offers tools such as AI chatbots,voice-controlled interfaces ,PDF exporting tools ,smart
+                  calculators,virtual assistant's and
+                  digital marketing enhancements.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Is HarshTech suitable for mobile and desktop users?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Yes! All HarshTech web tools are <b>Fully responsive</b>,ensuring a seamless
+                  experience across smartphones ,tablets,laptops and desktops.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  Can I use HarshTech tools without coding knowledge ?
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Absolutely, HarshTech tools are designed to be user-friendly,with voice commands ,button, and visual
+                  interfaces that require no programming skills
+                  You can access the more advanced tools and AI assistant's through the login process.
+
+                  <p>Some of the most popular Web Tools and Assistent's include:</p>
+                  <ul>
+                    <li>Programming Skill hub.</li>
+                    <li>Mini Excel and Word Tools.</li>
+                    <li>AI resume builder.</li>
+                    <li>Natasha chatbot and Assistent.</li>
+                    <li>Smart-advanced Calculator.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FAQ End  -->
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <h4 class="text-white mb-3">Quick Link</h4>
+          <p><a class="text-light" href="about.html">About Us</a></p>
+          <p><a class="text-light" href="contact.html">Contact Us</a></p>
+          <p><a class="text-light" href="">FAQs & Help</a></p>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="text-white mb-3">Contact</h4>
+          <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>9734 a.p Tikpurli, Radhanagari Kolhapur Maharashtra -
+            416208.</p>
+          <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9970898012</p>
+          <p class="mb-2"><i class="fa fa-envelope me-3"></i>harshtech417@gmail.com</p>
+          <div class="d-flex pt-2">
+
+            <a class="btn btn-outline-light btn-social" href="https://youtube.com/@harshtechaiworld?si=atZyhy8X8SAHiupw"><i class="fab fa-youtube"></i></a>
+            <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/in/harshad-teli-560700330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h4 class="text-white mb-3">Subscribe to our Newsletter</h4>
+          <p>Subscribe now and join our growing community with Modern Technology </p>
+          <div class="position-relative mx-auto" style="max-width: 400px;">
+            <form action="#">
+              <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email" placeholder="Your email" required>
+              <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"><a
+                  href="mailto:harshtech417@gmail.com">Subscribe</a></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="index.html">2025 HarshTech Organization </a>| All Right Reserved.
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+  <!-- Template Javascript -->
+  <script src="js/main.js"></script>
+   <script src="./js/prevent.js"></script>
+
+</body>
+
+</html>

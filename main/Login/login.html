@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="shortcut icon" href="../assets/images/harshtech.jpg" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      /* background: linear-gradient(120deg, #1f1c2c, #928dab); */
+      /* background-color: white; */
+      background-image: url('../assets/images/login-back.jpg');
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 450px;
+      height: auto;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+      display: none;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .container.active {
+      display: block;
+    }
+
+    h2,
+    h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #00ffab;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #00c78c;
+    }
+
+    .popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00ffab;
+      color: black;
+      padding: 15px 25px;
+      border-radius: 8px;
+      display: none;
+      z-index: 999;
+      font-weight: bold;
+    }
+
+    .popup.error {
+      background: #ff4d4d;
+      color: white;
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 10px auto;
+      display: block;
+      border: 2px solid #00ffab;
+      cursor: pointer;
+    }
+
+    .chatbot {
+      background: #222;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border-left: 4px solid #00ffab;
+    }
+
+    .chatbot h4 {
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .chatbot p {
+      font-size: 0.9rem;
+    }
+
+    .logout-btn {
+      background: #ff4d4d;
+      color: white;
+      margin-top: 25px;
+    }
+
+    .logout-btn:hover {
+      background: #ff1a1a;
+    }
+
+    label.remember {
+      display: flex;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    label.remember input {
+      margin-right: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="popup" id="popup"></div>
+  <div class="container active" id="loginPage">
+    <center><img src="mainlogo.png" height="50px" width="auto" alt="harshtech-logo"
+        style="border-radius: 50%;" /></center>
+    <h2>Create Account</h2>
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="password" placeholder="Create New Password">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+    <button id="signinbtn" onclick="validateSignUp()">Sign Up</button>
+    <audio src="../assets/AI/2.mp3" id="signinaud" preload="auto"></audio>
+    <script>
+      const signinbtn = document.getElementById("signinbtn");
+      const signinaud = document.getElementById("signinaud");
+      signinbtn.addEventListener("click", () => {
+        signinaud.play();
+      });
+    </script>
+    <button id="signupbtn" onclick="goToSignIn()">Go to Sign In</button>
+    <audio src="../assets/AI/2.mp3" id="signupaud" preload="auto"></audio>
+    <script>
+      const signupbtn = document.getElementById("signupbtn");
+      const signupaud = document.getElementById("signupaud");
+      signupbtn.addEventListener("click", () => {
+        signupaud.play();
+      });
+    </script>
+  </div>
+  <div class="container" id="signInPage">
+    <center><img src="mainlogo.png" height="50px" width="auto" alt="harshtech-logo"
+        style="border-radius: 50%;" /></center>
+    <h2>Sign In</h2>
+    <input type="email" id="signinEmail" placeholder="Enter Email">
+    <input type="password" id="signinPassword" placeholder="Enter Password">
+    <label class="remember"><input type="checkbox" id="rememberMe"> Remember Me</label>
+    <button id="setupprofile" onclick="validateSignIn()">Sign In</button>
+    <audio src="../assets/AI/3.mp3" id="setup" preload="auto"></audio>
+    <script>
+      const setupprofile = document.getElementById("setupprofile");
+      const setup = document.getElementById("setup");
+      setupprofile.addEventListener("click", () => {
+        setup.play();
+      });
+    </script>
+  </div>
+  <div class="container" id="profileSetup">
+    <h2 id="setupMsg">Setup Your Profile</h2>
+    <form id="setupForm">
+      <input type="text" id="profileName" readonly>
+      <input type="file" id="profilePhoto" accept="image/*">
+      <input type="text" id="skills" placeholder="Your Skills">
+      <select id="favBot">
+        <option value="">Select Your Proffession</option>
+        <option value="Chat Genius">Student</option>
+        <option value="TaskMaster AI">Programmer</option>
+        <option value="Scheduler Pro">Learner</option>
+        <option value="Scheduler Pro">Teacher</option>
+        <option value="TaskMaster AI">Other</option>
+      </select>
+      <button id="created" type="submit">Create Profile</button>
+      <audio src="../assets/AI/4.mp3" preload="auto" id="createaud"></audio>
+      <script>
+        const created = document.getElementById("created");
+        const createaud = document.getElementById("createaud");
+        created.addEventListener("click", () => {
+          createaud.play();
+        });
+      </script>
+    </form>
+  </div>
+  <div class="container" id="dashboardPage">
+    <img src="https://i.ibb.co/TkR0ZTx/default-user.png" id="dashImage" class="profile-pic"
+      onclick="changeProfileImage()">
+    <input type="file" id="changePhotoInput" accept="image/*" style="display:none;">
+    <h3 id="dashName">Hello, User</h3>
+    <p id="favBotDisplay">Favorite Bot: —</p>
+    <div class="chatbot">
+      <h4>💬 Programming Skills Guider <span>🟢 Online</span></h4>
+      <p>This assistent that help to user who can interest in to learning the Programming Language and to display the best results from youtube</p>
+     <a href="https://harshadteli.github.io/web-product6/"> <button>Start Conversation</button></a>
+    </div>
+    <div class="chatbot">
+      <h4>📲 Web-Tools Assistent <span>🟢 Online</span></h4>
+      <p>According to your requirement it is help to accessing free web tools & app instead of without installing this apps.</p>
+      <a href="https://harshadteli.github.io/web-product7/"> <button>Start Conversation</button></a>
+    </div>
+    <div class="chatbot">
+      <h4>💬 Programming Skills Advanced Assistent <span>🟢 Online</span></h4>
+      <p>This assistent can be advanced version for to guide and help to user who interest in the learning the various
+        programming skills.also it can be help to decide which language you can decide to learn.
+        It is specially design for the beginner.
+      </p>
+     <a href="https://harshadteli.github.io/web-product8/"> <button>Start Conversation</button></a>
+    </div>
+    <div class="chatbot">
+      <h4>🤹 Gaming Assistent Chatbot <span>🟢 Online</span></h4>
+      <p>It is include to various online games that help to user in quick playing the games without installing there apps.
+      </p>
+     <a href="https://harshadteli.github.io/web-product9/"> <button>Start Playing</button></a>
+    </div>
+    <div class="chatbot">
+      <h4>🔊 English-Speaking Chatbot<span>🟢 Online</span></h4>
+      <p>This assistent can be help to improve your english for asking the basic questionss and also guide at each questions depending upon user communication skills.
+      </p>
+     <a href="https://harshadteli.github.io/web-product10/"> <button>Start Conversation</button></a>
+    </div>
+    <div class="chatbot">
+      <h4>📅 We-Advanced Calculaor<span>🟢 Online</span></h4>
+      <p>This calculator can be perform the Airthmetic operations but it can more add features that it takes voice command and 
+        it perform opeartions correctly without touching the screen.
+      </p>
+     <a href="https://harshadteli.github.io/web-product1/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🤖 Resume Builder Application<span>🟢 Online</span></h4>
+      <p>Thiis AI application can build your resume automatically by entering appropriate information.
+      </p>
+     <a href="https://harshadteli.github.io/web-product2/"> <button>Start Creating</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🤖 Astrobot<span>🟢 Online</span></h4>
+      <p>This astrobot includes some emotions of humans that help to stay always happy.
+      </p>
+     <a href="https://harshadteli.github.io/web-product3/"> <button>Start Conversation</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🔊 English-Speaking Chatbot<span>🟢 Online</span></h4>
+      <p>This assistent can be help to improve your english for asking the basic questionss and also guide at each questions depending upon user communication skills.
+      </p>
+     <a href="https://harshadteli.github.io/web-product10/"> <button>Start Conversation</button></a>
+    </div>
+     <!-- <div class="chatbot">
+      <h4> <div class="chatbot">
+      <h4>📸 Web-Camera Assistent<span>🟢 Online</span></h4>
+      <p>This application can control your camera  through web using input voice command. This user-friendly AI Application do not use or 
+        store your pictures and photos illegally.So use it friendly.
+      </p>
+     <a href="https://harshadteli.github.io/web-product4/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>📃 Terminal<span>🟢 Online</span></h4>
+      <p>This terminal is made by Harshad Teli to taking the voice command from user and give the output.
+      </p>
+     <a href="https://harshadteli.github.io/web-product5/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>⚙️ Web-Excel<span>🟢 Online</span></h4>
+      <p>You can use this excel on your browser with AI based integration.
+      </p>
+     <a href="https://harshadteli.github.io/web-excel/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>⚙️ Web-Word Application<span>🟢 Online</span></h4>
+      <p>You can use this word on your browser with AI based integration.
+      </p>
+     <a href="https://harshadteli.github.io/web-word/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🤖 Mezo Assistent<span>🟢 Online</span></h4>
+      <p>Hii... I am Mezo your basic assistent.
+      </p>
+     <a href="https://harshadteli.github.io/web-product11/"> <button>Start Conversation</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🤖 Simple Chatbot<span>🟢 Online</span></h4>
+      <p>This is simple Chatbot
+      </p>
+     <a href="https://harshadteli.github.io/web-product12/"> <button>Start Conversation</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🤖 JARVIS<span>🟢 Online</span></h4>
+      <p>Hii..,I am Jarvis
+      </p>
+     <a href="https://harshadteli.github.io/jarvis-assistent-aitechnology/"> <button>Start Conversation</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>⏰ Web Smart Clock<span>🟢 Online</span></h4>
+      <p>This Application can you use your browser instead of installing there apps.
+      </p>
+     <a href="https://harshadteli.github.io/web-smart-clock/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>📃 Web Task Manger<span>🟢 Online</span></h4>
+      <p>This Application can you use your browser instead of installing there apps.
+      </p>
+     <a href="https://harshadteli.github.io/web-smart-task-manager/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🗓️ Web-Calender<span>🟢 Online</span></h4>
+      <p>This Application can you use your browser instead of installing there apps.
+      </p>
+     <a href="https://harshadteli.github.io/web-smart-calender/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>⚙️ HarshTech Code Editor<span>🟢 Online</span></h4>
+      <p>This Application can you use your browser instead of installing there apps.
+      </p>
+     <a href="https://harshadteli.github.io/harshtech-code-editor/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>🐉 Web-Dragon<span>🟢 Online</span></h4>
+      <p>This is awsome dragon open in your browser.
+      </p>
+     <a href="https://harshadteli.github.io/web-product13/"> <button>Start Using</button></a>
+    </div>
+     <div class="chatbot">
+      <h4>👾 Web-Monster<span>🟢 Online</span></h4>
+      <p>This is awsome dragon open in your browser.
+      </p>
+     <a href="https://harshadteli.github.io/web-product15/"> <button>Start Using</button></a>
+    </div> -->
+    <button id="logbtn" class="logout-btn" onclick="logout()">Logout</button>
+    <audio src="../assets/AI/5.mp3" id="logaud"></audio>
+    <script>
+      const logbtn = document.getElementById("logbtn");
+      const logaud = document.getElementById("logaud");
+      logbtn.addEventListener("click", () => {
+        logaud.play();
+      });
+    </script>
+  </div>
+  <script>
+    const popup = document.getElementById("popup");
+    const loginPage = document.getElementById("loginPage");
+    const signInPage = document.getElementById("signInPage");
+    const profileSetup = document.getElementById("profileSetup");
+    const dashboardPage = document.getElementById("dashboardPage");
+
+    function showPopup(msg, error = false) {
+      popup.textContent = msg;
+      popup.className = error ? 'popup error' : 'popup';
+      popup.style.display = "block";
+      setTimeout(() => popup.style.display = "none", 2000);
+    }
+
+    function goToSignIn() {
+      loginPage.classList.remove("active");
+      signInPage.classList.add("active");
+    }
+
+    function validateSignUp() {
+     
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const pass = document.getElementById("password").value;
+      const confirm = document.getElementById("confirmPassword").value;
+
+      if (!name || !email || !pass || !confirm) return showPopup("Fill all fields", true);
+      if (pass !== confirm) return showPopup("Passwords do not match", true);
+
+      if (localStorage.getItem("useremail") === email) {
+        showPopup("Email already registered. Please Sign In.", true);
+        goToSignIn();
+        return;
+      }
+
+      localStorage.setItem("username", name);
+      localStorage.setItem("useremail", email);
+      localStorage.setItem("userpass", pass);
+      showPopup("Account created successfully!");
+      goToSignIn();
+    }
+
+    function validateSignIn() {
+      const email = document.getElementById("signinEmail").value;
+      const pass = document.getElementById("signinPassword").value;
+      const remember = document.getElementById("rememberMe").checked;
+
+      const storedEmail = localStorage.getItem("useremail");
+      const storedPass = localStorage.getItem("userpass");
+
+      if (email === storedEmail && pass === storedPass) {
+        if (remember) localStorage.setItem("remembered", "yes");
+        else localStorage.removeItem("remembered");
+
+        if (localStorage.getItem("favBot")) {
+          showDashboard();
+        } else {
+          signInPage.classList.remove("active");
+          profileSetup.classList.add("active");
+          document.getElementById("profileName").value = localStorage.getItem("username");
+          document.getElementById("setupMsg").textContent = `Hello ${localStorage.getItem("username")}, Setup Your Profile`;
+        }
+      } else {
+        showPopup("Email or password invalid!", true);
+      }
+    }
+
+    document.getElementById("setupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      localStorage.setItem("favBot", document.getElementById("favBot").value);
+      localStorage.setItem("skills", document.getElementById("skills").value);
+      const file = document.getElementById("profilePhoto").files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          localStorage.setItem("userPhoto", e.target.result);
+          showDashboard();
+        };
+        reader.readAsDataURL(file);
+      } else {
+        showDashboard();
+      }
+
+      showPopup("Profile created successfully!");
+    });
+
+    function showDashboard() {
+      profileSetup.classList.remove("active");
+      dashboardPage.classList.add("active");
+      document.getElementById("dashName").textContent = "Hello, " + localStorage.getItem("username");
+      document.getElementById("favBotDisplay").textContent = "Deafult Bot: " + (localStorage.getItem("favBot") || "—");
+      document.getElementById("dashImage").src = localStorage.getItem("userPhoto") || "https://i.ibb.co/TkR0ZTx/default-user.png";
+    }
+
+    function changeProfileImage() {
+      document.getElementById("changePhotoInput").click();
+    }
+
+    document.getElementById("changePhotoInput").addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const newImg = e.target.result;
+          document.getElementById("dashImage").src = newImg;
+          localStorage.setItem("userPhoto", newImg);
+          showPopup("Profile photo updated!");
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem("remembered");
+      dashboardPage.classList.remove("active");
+      loginPage.classList.add("active");
+      showPopup("Logged out successfully");
+    }
+
+    window.onload = () => {
+      const remembered = localStorage.getItem("remembered") === "yes";
+      if (remembered && localStorage.getItem("favBot")) {
+        loginPage.classList.remove("active");
+        signInPage.classList.remove("active");
+        profileSetup.classList.remove("active");
+        showDashboard();
+      }
+    };
+  </script>
+   <script src="../js/prevent.js"></script>
+</body>
+
+</html>
