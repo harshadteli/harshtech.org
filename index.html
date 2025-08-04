@@ -1,76 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Construction</title>
-    <style>
-       body {
-    font-family: Arial, sans-serif;
-    background-color: black;
-}
-
-.container {
-    width: 80%;
-    margin: 40px auto;
-    text-align: center;
-    color: #ff0000; /* Red color */
-}
-
-.animation-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100px;
-    margin: 20px auto;
-}
-
-.circle {
-    width: 20px;
-    height: 20px;
-    background-color: #ff0000; /* Red color */
-    border-radius: 50%;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.5);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.circle:nth-child(1) {
-    animation-delay: 0.2s;
-}
-
-.circle:nth-child(2) {
-    animation-delay: 0.4s;
-}
-
-.circle:nth-child(3) {
-    animation-delay: 00.6s;
-}
-    </style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HarshTech Organization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HarshTech by Harshad Teli is a dynamic tech platform offering simple AI tools,voice assistents,
+  innovative web apps and educational projects.Built with Modern Technologies,HarshTech empowers users with smart ,interacttive,and future-ready
+   digital solutions.">
+  <meta name="keywords" content="HarshTech">
+  <meta name="subject" content="AI">
+  <meta name="copyright" content="HarshTech Organization">
+  <meta name="language" content="English">
+  <meta name="robots" content="index,follow">
+  <meta name="revised" content="saturday,august 5th,2025,8:45 pm">
+  <meta name="abstract" content="HarshTech  specializes in custom Software Development and Web design solutions.">
+  <meta name="topic" content="Software Development">
+  <meta name="summary" content="HarshTech Provides innovative technology solutions for business">
+  <meta name="classification" content="business">
+  <meta name="author" content="Harshad Teli">
+  <meta name="author" content="harshadteli697@gmail.com">
+  <meta name="designer" content="Harshad Teli">
+  <meta name="reply-to" content="harshtech417@gmail.com">
+  <meta name="owner" content="Harshad Teli">
+  <meta name="directory" content="Technology">
+  <meta name="pagename" content="HarshTech Organization feedback form">
+  <meta name="category" content="Web Development">
+  <meta name="coverage" content="Worldwide">
+  <meta name="distribution" content="Global">
+  <!-- Google site verification code -->
+  <meta name="google-site-verification" content="B3a3ZbAh_Xv1_U0zF5mqbKrUp80nEmUqpMu7ZdiwMQI" />
+  <link rel="stylesheet" href="./assets/CSS/style.css">
+  <link rel="shortcut icon" href="./assets/IMAGES/harshtech-logo.jpg" type="image/x-icon">
 </head>
+
 <body>
-   
-    <div class="container">
-        <h1>This Site Under Construction</h1>
-        <p>&copy; 2025 Harshtech Organization | All Rights Reserved</p>
-        <div class="animation-container">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-        </div>
-    </div>
-    <center><img src="work.gif"alt="E404"/></center>
-    <script>
-       
-    </script>
+  <audio src="./assets/VOICE/1.mp3" preload="auto" id="enteraud"></audio>
+  <!-- Main content -->
+  <div class="container">
+    <img src="./assets/IMAGES/mainlogo.png" style="border-radius: 50%;" alt="HarshTech Logo" class="main-logo" />
+    <h1>Welcome to HarshTech</h1>
+    <p class="subtitle">Innovating the Future, One Line of Code at a Time</p>
+    <div class="typewriter" id="typewriter"></div>
+    <p class="founder">Founded by <strong>Harshad Teli</strong></p>
+    <button class="enter-class" id="startbtn">Enter Site</button><br>
+    <!-- <a href="https://harshtech.org" id="startbtn" class="enter-button">Enter Site</a> -->
+  </div>
+  <script>
+    const startaud = document.getElementById("enteraud");
+    const start = document.getElementById("startbtn");
+    start.addEventListener("click", () => {
+      startaud.play();
+      window.open('./main/index.html');
+      //      setTimeout(() => {
+      //     window.open('index2.html');
+      // }, startaud.duration * 1000);
+    })
+  </script>
+  <script src="./assets/JS/script.js"></script>
+  <script src="./assets/JS/prevent.js"></script>
 </body>
+
 </html>
